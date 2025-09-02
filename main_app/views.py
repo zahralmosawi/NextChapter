@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth import login
 from .forms import SignUpForm
+from .models import User, StudentProfile, ProgressLog
 
 def is_tracker(u):
     return u.role == u.Role.TRACKER

@@ -38,5 +38,17 @@ class ProgressLog(models.Model):
     class Meta: 
         db_table = 'progress_log'
 
+    @property
+    def month_number(self):
+        from dateutil.relativedelta import relativedelta
+
+        start_date = self.student.support_start_date
+        log_date = self.date
+
+        diff = relativedelta(log_date, start_date)
+        months_diff = diff.years * 12 + diff.months
+
+        return months_diff + 1 if months_diff >= 0 else 0
+    
     def __str__(self):
-        return self.student
+        return self.student.name + " - " + str(self.date)
