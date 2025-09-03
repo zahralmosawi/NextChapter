@@ -43,8 +43,7 @@ class AddStudentView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     success_url = reverse_lazy('home')
 
     def test_func(self):
-        # return self.request.user.role == User.Role.TRACKER
-        return True
+        return self.request.user.role == User.Role.TRACKER
 
     def form_valid(self, form):
         temp_password = secrets.token_urlsafe(8)
