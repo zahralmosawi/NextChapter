@@ -18,17 +18,7 @@ class SignUpForm(forms.ModelForm):
         return user
 
 class StudentProfileForm(forms.ModelForm):
+    email = forms.EmailField(required=True)
     class Meta:
         model = StudentProfile
-        fields = ['name', 'linkedin_url', 'cv_file', 'support_start_date']
-
-        def save(self, commit=True):
-            profile = super().save(commit=False)
-
-            start_date = profile.support_start_date
-            profile.end_date = start_date + relativedelta(months=+9)
-
-            if commit:
-                profile.save()
-
-            return profile
+        fields = ['name', 'email', 'linkedin_url', 'cv_file', 'support_start_date']

@@ -46,9 +46,10 @@ class ProgressLog(models.Model):
         log_date = self.date
 
         diff = relativedelta(log_date, start_date)
-        months_diff = diff.years * 12 + diff.months
+        months_diff = diff.years * 12 + diff.months # full months only ignore days
 
-        return months_diff + 1 if months_diff >= 0 else 0
+        # starting month is month 1
+        return months_diff + 1 if months_diff >= 0 else 0 
     
     def __str__(self):
         return self.student.name + " - " + str(self.date)
