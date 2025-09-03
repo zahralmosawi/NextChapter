@@ -69,3 +69,10 @@ class AddStudentView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
         return redirect(self.success_url)
     
+class ListStudentsView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = StudentProfile
+    template_name = 'tracker/students_list.html'
+    context_object_name = 'students'
+
+    def test_func(self):
+        return self.request.user.role == User.Role.TRACKER
