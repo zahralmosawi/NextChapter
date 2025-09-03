@@ -95,3 +95,10 @@ class UpdateStudentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def test_func(self):
         return self.request.user.role == User.Role.TRACKER
+    
+class DeleteStudentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = StudentProfile
+    success_url = reverse_lazy('students_list')
+
+    def test_func(self):
+        return self.request.user.role == User.Role.TRACKER

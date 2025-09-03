@@ -7,4 +7,8 @@
     <p>CV: <a href="{{ student.cv_file.url }}">Download CV</a></p>
     <p>Support Start Date: {{ student.support_start_date }}</p>
     
+    <form action="{% url 'delete_student' student.pk %}" method='post'>
+        {% csrf_token %}
+        <button>DELETE</button>
+    </form>
 {% endblock content %}
