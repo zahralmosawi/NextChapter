@@ -76,3 +76,11 @@ class ListStudentsView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
     def test_func(self):
         return self.request.user.role == User.Role.TRACKER
+
+class StudentDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+    model = StudentProfile
+    template_name = 'tracker/student_detail.html'
+    context_object_name = 'student'
+
+    def test_func(self):
+        return self.request.user.role == User.Role.TRACKER

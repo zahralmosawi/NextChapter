@@ -1,0 +1,10 @@
+{% block content %}
+    <h1>Student Detail</h1>
+
+    <p>Name: {{ student.name }}</p>
+    <p>Email: {{ student.user.email }}</p>
+    <p>LinkedIn: <a href="{{ student.linkedin_url }}">{{ student.linkedin_url }}</a></p>
+    <p>CV: <a href="{{ student.cv_file.url }}">Download CV</a></p>
+    <p>Support Start Date: {{ student.support_start_date }}</p>
+    
+{% endblock content %}
