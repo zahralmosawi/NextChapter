@@ -84,3 +84,14 @@ class StudentDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
 
     def test_func(self):
         return self.request.user.role == User.Role.TRACKER
+    
+class UpdateStudentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = StudentProfile
+    form_class = StudentProfileForm
+    template_name = 'tracker/add_student.html'
+
+    def get_success_url(self):
+        return reverse_lazy('student_detail', kwargs={'pk': self.object.pk})
+    
+    def test_func(self):
+        return self.request.user.role == User.Role.TRACKER
