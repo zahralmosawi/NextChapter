@@ -102,3 +102,16 @@ class DeleteStudentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.role == User.Role.TRACKER
+
+# Student Views
+class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
+    template_name = 'student/dashboard.html'
+    context_object_name = 'student'
+
+    def test_func(self):
+        return self.request.user.role == User.Role.STUDENT
+
+    def get(self, request):
+        student_profile = StudentProfile.objects.get(user=request.user)
+        print(f"StudentProfile found: {student_profile} for user {request.user} (id={request.user.id})")
+        return render(request, 'student/dashboard.html', {'student': student_profile})
