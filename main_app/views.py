@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth import login
-from .forms import SignUpForm, StudentProfileForm
+from .forms import SignUpForm, StudentProfileForm, ProgressLogForm
 from .models import User, StudentProfile, ProgressLog
 
 def is_tracker(user):
@@ -102,7 +102,31 @@ class DeleteStudentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.role == User.Role.TRACKER
+    
+class AddProgressLogView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = ProgressLog
+    form_class = ProgressLogForm
+    template_name = 'tracker/add_progress_log.html'
 
+    def test_func(self):
+        return self.request.user.role == User.Role.TRACKER
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        student_id = self.kwargs['student_id']
+        context['student'] = StudentProfile.objects.get(id=student_id)
+        return context
+    
+    def form_valid(self, form):
+        student_id = self.kwargs['student_id']
+        student = StudentProfile.objects.get(id=student_id)
+        form.instance.student = student
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        student_id = self.kwargs['student_id']
+        return reverse_lazy('student_detail', kwargs={'pk': student_id})
+    
 # Student Views
 class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
     template_name = 'student/dashboard.html'

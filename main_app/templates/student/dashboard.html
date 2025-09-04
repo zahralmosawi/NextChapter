@@ -2,7 +2,7 @@
 
     <h1>Welcome to Your Dashboard</h1>
     <h2>Your Profile</h2>
-    
+
     <h3>{{student.name}}</h3>
     <p><strong>LinkedIn: <a href="{{student.linkedin_url}}" target="_blank">{{student.linkedin_url}}</a></strong></p>
     <p><strong>CV: <a href="{{student.cv_file}}" target="_blank">{{student.cv_file}}</a></strong></p>
@@ -12,6 +12,5 @@
     {% if student.employment_status == 'EMPLOYED' %}
         <p><strong>Job Title: {{student.job_title}}</strong></p>
         <p><strong>Job Start Date: {{student.job_start_date}}</strong></p>
-    {% endif %}
-
+    {% endif %}    
 {% endblock  %}

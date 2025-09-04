@@ -10,4 +10,5 @@ urlpatterns = [
     path('tracker/student/<int:pk>/edit/', views.UpdateStudentView.as_view(), name='edit_student'),
     path('tracker/<int:pk>/delete/', views.DeleteStudentView.as_view(), name='delete_student'),
     path('student/dashboard/', views.StudentDashboardView.as_view(), name='student_dashboard'),
+    path('tracker/student/<int:student_id>/add-log/', views.AddProgressLogView.as_view(), name='add_progress_log'),
 ]
