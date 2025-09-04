@@ -129,7 +129,7 @@ class UpdateProgressLogView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         return self.request.user.role == User.Role.TRACKER
     
     def get_success_url(self):
-        return reverse_lazy('student_detail', kwargs={'pk': self.object.student.pk})
+        return reverse_lazy('progress_log_detail', kwargs={'pk': self.object.student.pk})
     
 # Student Views
 class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
