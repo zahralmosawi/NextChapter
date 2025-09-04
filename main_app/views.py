@@ -24,7 +24,7 @@ class AddStudentView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = StudentProfile
     form_class = StudentProfileForm
     template_name = 'tracker/add_student.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('students_list')
 
     def test_func(self):
         return self.request.user.role == User.Role.TRACKER
