@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Progress Log Detail For {{ progress_log.student }}</h1>
+    <p><strong>Date:</strong> {{ progress_log.date }}</p>
+    <p><strong>Interaction Type:</strong> {{ progress_log.interaction_type }}</p>
+    <p><strong>Status:</strong> {{ progress_log.status }}</p>
+    <p><strong>Tracker:</strong> {{ progress_log.tracker_name }}</p>
+    <p><strong>Comment:</strong> {{ progress_log.comment }}</p>
+
+{% endblock  %}
