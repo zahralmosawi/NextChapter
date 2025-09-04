@@ -12,4 +12,5 @@
         {% csrf_token %}
         <button>DELETE</button>
     </form>
+    <a href="{% url 'edit_student' student.pk %}">Edit</a>
 {% endblock content %}
