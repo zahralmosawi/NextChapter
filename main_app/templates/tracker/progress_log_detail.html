@@ -8,4 +8,5 @@
     <p><strong>Tracker:</strong> {{ progress_log.tracker_name }}</p>
     <p><strong>Comment:</strong> {{ progress_log.comment }}</p>
 
+    <a href="{% url 'edit_progress_log' progress_log.pk %}">Edit</a>
 {% endblock  %}
