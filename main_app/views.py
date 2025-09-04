@@ -5,7 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth import login
 from .forms import SignUpForm, StudentProfileForm
-from .models import User, StudentProfile
+from .models import User, StudentProfile, ProgressLog
 
 def is_tracker(user):
     return user.role == user.Role.TRACKER
@@ -114,4 +114,5 @@ class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request):
         student_profile = StudentProfile.objects.get(user=request.user)
         print(f"StudentProfile found: {student_profile} for user {request.user} (id={request.user.id})")
+        # progress_logs = ProgressLog.objects.filter(student=student_profile).order_by('-date')
         return render(request, 'student/dashboard.html', {'student': student_profile})
