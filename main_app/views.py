@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth import login
-from .forms import SignUpForm, StudentProfileForm, ProgressLogForm
+from .forms import StudentProfileForm, ProgressLogForm
 from .models import User, StudentProfile, ProgressLog
 
 def is_tracker(user):
@@ -15,22 +15,6 @@ def is_student(user):
 
 def home(request):
     return render(request, 'home.html')
-
-class SignUpView(View):
-    def get(self, request):
-        form = SignUpForm()
-        return render(request, 'registration/sign-up.html', {'form': form})
-    
-    def post(self, request):
-        form = SignUpForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-
-            return redirect('login')
-        
-        return render(request, 'registration/sign-up.html', {'form': form})
-    
 
 from django.conf import settings
 import secrets    
