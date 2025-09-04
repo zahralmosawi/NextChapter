@@ -112,6 +112,17 @@ class AddProgressLogView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         student_id = self.kwargs['student_id']
         return reverse_lazy('student_detail', kwargs={'pk': student_id})
     
+class UpdateProgressLogView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = ProgressLog
+    form_class = ProgressLogForm
+    template_name = 'tracker/add_progress_log.html'
+
+    def test_func(self):
+        return self.request.user.role == User.Role.TRACKER
+    
+    def get_success_url(self):
+        return reverse_lazy('student_detail', kwargs={'pk': self.object.student.pk})
+    
 # Student Views
 class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
     template_name = 'student/dashboard.html'
