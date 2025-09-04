@@ -32,7 +32,7 @@ class ProgressLog(models.Model):
     date = models.DateField()
     interaction_type = models.CharField(max_length=20, choices=[('CALL', 'Call'),('INTERVIEW', 'Interview'),('CV_UPDATE', 'CV Update'),('OTHER', 'Other')])
     status = models.CharField(max_length=20, choices=[('ANSWERED', 'Answered'), ('MISSED', 'Missed'),('COMPLETED', 'Completed'), ('PENDING', 'Pending')], default='PENDING')
-    instructor_name = models.CharField(max_length=255, blank=True, null=True)
+    tracker_name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, limit_choices_to={'role': User.Role.TRACKER})
     comment = models.TextField(blank=True, null=True)
 
     class Meta: 

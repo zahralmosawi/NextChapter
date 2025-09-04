@@ -105,6 +105,7 @@ class AddProgressLogView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         student_id = self.kwargs['student_id']
         student = StudentProfile.objects.get(id=student_id)
         form.instance.student = student
+        form.instance.tracker_name = self.request.user.get_full_name() or self.request.user.username
         return super().form_valid(form)
     
     def get_success_url(self):

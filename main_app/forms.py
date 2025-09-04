@@ -11,4 +11,4 @@ class StudentProfileForm(forms.ModelForm):
 class ProgressLogForm(forms.ModelForm):
     class Meta:
         model = ProgressLog
-        fields = ['date', 'interaction_type', 'status', 'instructor_name', 'comment']
+        fields = ['date', 'interaction_type', 'status', 'tracker_name', 'comment']
