@@ -128,8 +128,13 @@ class UpdateProgressLogView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
     def test_func(self):
         return self.request.user.role == User.Role.TRACKER
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['student'] = self.object.student
+        return context
+    
     def get_success_url(self):
-        return reverse_lazy('progress_log_detail', kwargs={'pk': self.object.student.pk})
+        return reverse_lazy('progress_log_detail', kwargs={'pk': self.object.pk})
     
 # Student Views
 class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
