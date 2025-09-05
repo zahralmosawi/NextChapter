@@ -202,5 +202,26 @@ class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
     def get(self, request):
         student_profile = StudentProfile.objects.get(user=request.user)
         print(f"StudentProfile found: {student_profile} for user {request.user} (id={request.user.id})")
-        # progress_logs = ProgressLog.objects.filter(student=student_profile).order_by('-date')
-        return render(request, 'student/dashboard.html', {'student': student_profile})
+        
+        progress_logs = ProgressLog.objects.filter(student=student_profile).order_by('-date')
+
+        from dateutil.relativedelta import relativedelta
+        from django.utils import timezone
+
+        today = timezone.now().date()
+        if student_profile.support_start_date:
+            delta = relativedelta(today, student_profile.support_start_date)
+            current_month = delta.years * 12 + delta.months + 1
+            total_months = 9
+            current_month = min(current_month / total_months)
+        else:
+            current_month = 0
+            total_months = 0
+            
+        context = {
+            'student': student_profile,
+            'progress_logs': progress_logs,
+            'current_month': current_month,
+            'total_months': total_months,
+        }
+        return render(request, 'student/dashboard.html', context)
