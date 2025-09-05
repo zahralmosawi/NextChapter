@@ -169,11 +169,17 @@ class ListProgressLogsView(LoginRequiredMixin, UserPassesTestMixin, ListView):
 
 class ProgressLogDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = ProgressLog
-    template_name = 'tracker/progress_log_detail.html'
+    template_name = 'progress_log_detail.html'
     context_object_name = 'progress_log'
 
     def test_func(self):
-        return self.request.user.role == User.Role.TRACKER
+        progress_log = self.get_object()
+
+        if self.request.user.role == User.Role.TRACKER:
+            return True
+        elif self.request.user.role == User.Role.STUDENT and progress_log.student.user == self.request.user:
+            return True
+        return False
     
 class UpdateProgressLogView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ProgressLog
