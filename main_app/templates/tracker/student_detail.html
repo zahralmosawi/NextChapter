@@ -2,6 +2,10 @@
 {% block content %}
     <h1>Student Detail</h1>
     
+    {% if not max_logs_reached %}
+        <a href="{% url 'add_progress_log' student.pk %}">Add Progress Log</a>
+    {% endif %}
+
     {% if progress_logs %}
         <h3>Progress Logs</h3>
         {% for log in progress_logs %}
