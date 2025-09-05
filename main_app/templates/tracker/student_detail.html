@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Student Detail</h1>
+    
+    {% if progress_logs %}
+        <h3>Progress Logs</h3>
+        {% for log in progress_logs %}
+        <a href="{% url 'progress_log_detail' log.pk %}">
+            Month {{ log.month_number }}
+        </a>
+        {% endfor %}
+    {% endif %}
 
     <p>Name: {{ student.name }}</p>
     <p>Email: {{ student.user.email }}</p>
