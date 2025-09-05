@@ -69,6 +69,13 @@ class StudentDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     def test_func(self):
         return self.request.user.role == User.Role.TRACKER
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        student = self.get_object()
+        progress_logs = ProgressLog.objects.filter(student=student).order_by('-date')
+        context['progress_logs'] = progress_logs
+        return context
+    
 class UpdateStudentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = StudentProfile
     form_class = StudentProfileForm
