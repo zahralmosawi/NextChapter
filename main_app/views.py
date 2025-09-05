@@ -111,7 +111,32 @@ class AddProgressLogView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def get_success_url(self):
         student_id = self.kwargs['student_id']
         return reverse_lazy('student_detail', kwargs={'pk': student_id})
+
+class ListProgressLogsView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = ProgressLog
+    template_name = 'tracker/monthly_logs_list.html'
+    context_object_name = 'progress_logs'
+
+    def test_func(self):
+        return self.request.user.role == User.Role.TRACKER
     
+    def get_queryset(self):
+        student_id = self.kwargs['student_id']
+        month_number = self.kwargs['month_number']
+        logs = ProgressLog.objects.filter(student_id=student_id)
+        return [log for log in logs if log.month_number == month_number]
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        student_id = self.kwargs['student_id']
+        month_number = self.kwargs['month_number']
+        
+        context['student'] = StudentProfile.objects.get(id=student_id)
+        context['month_number'] = month_number
+        context['total_months'] = 9  
+        
+        return context
+
 class ProgressLogDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = ProgressLog
     template_name = 'tracker/progress_log_detail.html'

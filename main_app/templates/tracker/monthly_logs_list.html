@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+   <h2>Progress Logs for {{ student.name }} - Month {{ month_number }}</h2>
+
+    {% if progress_logs %}
+        {% for log in progress_logs %}
+            <p><strong>Date: </strong>{{ log.date }}</p>
+            <p><strong>Interaction: </strong>{{ log.get_interaction_type_display }}</p>
+            <p><strong>Status: </strong>{{ log.get_status_display }}</p>
+            <p><strong>Tracker: </strong>{{ log.tracker_name }}</p>
+            <p><strong>Comment: </strong>{{ log.comment }}</p>
+        {% endfor %}
+    {% else %}
+        <p>No logs found for month {{ month_number }}</p>
+    {% endif %}
+    
+{% endblock %}
