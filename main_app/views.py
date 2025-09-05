@@ -213,7 +213,7 @@ class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
             delta = relativedelta(today, student_profile.support_start_date)
             current_month = delta.years * 12 + delta.months + 1
             total_months = 9
-            current_month = min(current_month / total_months)
+            current_month = min(current_month, total_months)
         else:
             current_month = 0
             total_months = 0
