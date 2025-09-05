@@ -8,5 +8,8 @@
     <p><strong>Tracker:</strong> {{ progress_log.tracker_name }}</p>
     <p><strong>Comment:</strong> {{ progress_log.comment }}</p>
 
+    {% if User.Role.TRACKER %}
     <a href="{% url 'edit_progress_log' progress_log.pk %}">Edit</a>
+    {% endif %}
+    
 {% endblock  %}
