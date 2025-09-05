@@ -102,15 +102,28 @@ class AddProgressLogView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def test_func(self):
         return self.request.user.role == User.Role.TRACKER
     
+    def has_max_logs(self, student):
+        existing_months = set()
+        for log in ProgressLog.objects.filter(student=student):
+            existing_months.add(log.month_number)
+        return len(existing_months) >= 9
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         student_id = self.kwargs['student_id']
-        context['student'] = StudentProfile.objects.get(id=student_id)
+        student = StudentProfile.objects.get(id=student_id)
+        context['student'] = student
+        context['max_logs_reached'] = self.has_max_logs(student)
         return context
     
     def form_valid(self, form):
         student_id = self.kwargs['student_id']
         student = StudentProfile.objects.get(id=student_id)
+
+        if self.has_max_logs(student):
+            form.add_error(None, "Maximum of 9 monthly logs already reached! Cannot add more logs")
+            return self.form_invalid(form)
+        
         form.instance.student = student
         form.instance.tracker_name = self.request.user 
         return super().form_valid(form)
