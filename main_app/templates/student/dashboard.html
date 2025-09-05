@@ -13,4 +13,20 @@
         <p><strong>Job Title: {{student.job_title}}</strong></p>
         <p><strong>Job Start Date: {{student.job_start_date}}</strong></p>
     {% endif %}    
+    <hr>
+    
+    <h2>Your Progress Logs</h2>
+    {% if progress_logs %}
+        {{ current_month }}/{{ total_months }}
+        <ul>
+            {% for log in progress_logs %}
+                <li>
+                    <a href="{% url 'progress_log_detail' log.pk %}">Month {{ log.month_number }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No progress logs available</p>
+    {% endif %}
+
 {% endblock  %}
