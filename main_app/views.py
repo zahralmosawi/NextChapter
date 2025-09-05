@@ -74,6 +74,16 @@ class StudentDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
         student = self.get_object()
         progress_logs = ProgressLog.objects.filter(student=student).order_by('-date')
         context['progress_logs'] = progress_logs
+
+        from django.utils import timezone
+        today = timezone.now().date()
+        context['support_ended'] = today > student.support_end_date
+        
+        existing_months = set()
+        for log in progress_logs:
+            existing_months.add(log.month_number)
+        context['max_logs_reached'] = len(existing_months) >= 9
+        
         return context
     
 class UpdateStudentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
