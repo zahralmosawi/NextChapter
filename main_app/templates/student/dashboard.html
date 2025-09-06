@@ -1,33 +1,37 @@
 {% extends "base.html" %}
+{% load static %} 
 {% block content %}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}" />
+<h1>Welcome to Your Dashboard</h1>
+<div class="dashboard-container">
 
-    <h1>Welcome to Your Dashboard</h1>
-    <h2>Your Profile</h2>
-
-    <h3>{{student.name}}</h3>
-    <p><strong>LinkedIn: <a href="{{student.linkedin_url}}" target="_blank">{{student.linkedin_url}}</a></strong></p>
-    <p><strong>CV: <a href="{{student.cv_file}}" target="_blank">{{student.cv_file}}</a></strong></p>
-    <p><strong>Support Date: {{student.support_start_date}}</strong></p>
-
-    <p><strong>Employment Status: {{student.employment_status}}</strong></p>
-    {% if student.employment_status == 'EMPLOYED' %}
-        <p><strong>Job Title: {{student.job_title}}</strong></p>
-        <p><strong>Job Start Date: {{student.job_start_date}}</strong></p>
-    {% endif %}    
-    <hr>
-    
+  <div class="progress-logs-section">
     <h2>Your Progress Logs</h2>
-    {% if progress_logs %}
-        {{ current_month }}/{{ total_months }}
-        <ul>
-            {% for log in progress_logs %}
-                <li>
-                    <a href="{% url 'progress_log_detail' log.pk %}">Month {{ log.month_number }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+    {% if progress_logs %} 
+    {{ current_month }}/{{ total_months }}
+    <ul>
+      {% for log in progress_logs %}
+      <li><a href="{% url 'progress_log_detail' log.pk %}"> Month {{ log.month_number }}</a></li>
+      {% endfor %}
+    </ul>
     {% else %}
-        <p>No progress logs available</p>
+    <p>No progress logs available</p>
     {% endif %}
+  </div>
 
-{% endblock  %}
+  <div class="profile-section">
+    <h2>{{student.name}}</h2>
+    <p><strong>LinkedIn:<a href="{{student.linkedin_url}}" target="_blank">{{student.linkedin_url}}</a></strong></p>
+    <p><strong>CV:<a href="{{student.cv_file}}" target="_blank">{{student.cv_file}}</a></strong></p>
+    <p><strong>Support Date: {{student.support_start_date}}</strong></p>
+    <p><strong>Support End Date: {{student.support_end_date}}</strong></p>
+    <p><strong>Employment Status: {{student.employment_status}}</strong></p>
+
+    {% if student.employment_status == 'EMPLOYED' %}
+    <p><strong>Job Title: {{student.job_title}}</strong></p>
+    <p><strong>Job Start Date: {{student.job_start_date}}</strong></p>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,105 @@
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+/* Progress Logs Section */
+.progress-logs-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.progress-logs-section h2 {
+    color: #333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #000000;
+}
+
+.progress-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.progress-logs-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.progress-logs-section li {
+    margin: 0.8rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #717272;
+    transition: all 0.3s ease;
+}
+
+.progress-logs-section li:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.progress-logs-section a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+}
+
+.progress-logs-section a:hover {
+    color: #e96f4a;
+}
+
+/* Profile Section */
+.profile-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    text-align: center;
+    height: 100%;
+}
+
+.profile-section h2 {
+    color: #333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #000000;
+}
+
+.profile-section h3 {
+    color: #e96f4a;
+    margin-bottom: 1rem;
+}
+
+.profile-section p {
+    margin: 0.8rem 0;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-section p:last-child {
+    border-bottom: none;
+}
+
+.profile-section a {
+    color: #e96f4a;
+    text-decoration: none;
+}
+
+.profile-section a:hover {
+    text-decoration: underline;
+}
+
+p{
+    color: black;
+}
