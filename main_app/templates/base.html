@@ -1,9 +1,12 @@
 <!doctype html>
+{% load static %}
 <html>
   <head>
     <meta charset="utf-8"><title>NextChapter</title>
 </head>
   <body>
+    <img src="{% static 'images/NextChapter.png' %}" alt="NextChapter Logo" width="200" height="200">
+    <p>NextChapter</p>
     Welcome, {{user.username}}
     {% if user.role == user.Role.TRACKER %}
       <nav> 
@@ -18,7 +21,7 @@
         <button type="submit">Logout</button>
       </form>
     {% endif %} 
-    
+
     {% block content %}{% endblock %}
   </body>
 </html>
