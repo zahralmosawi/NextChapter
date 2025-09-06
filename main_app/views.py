@@ -220,6 +220,7 @@ class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
             current_month = delta.years * 12 + delta.months + 1
             total_months = 9
             current_month = min(current_month, total_months)
+            overall_progress = min((current_month / total_months) * 100, 100)
         else:
             current_month = 0
             total_months = 0
@@ -229,5 +230,6 @@ class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
             'progress_logs': progress_logs,
             'current_month': current_month,
             'total_months': total_months,
+            'overall_progress': overall_progress,
         }
         return render(request, 'student/dashboard.html', context)
