@@ -5,12 +5,20 @@
 </head>
   <body>
     Welcome, {{user.username}}
-    {% if User.Role.TRACKER %}
+    {% if user.role == user.Role.TRACKER %}
       <nav> 
         <a href="{% url 'add_student' %}">Add New Student</a> 
         <a href="{% url 'students_list' %}">Student List</a>
-    </nav>
+      </nav>
     {% endif %}
+
+    {% if user.role == user.Role.STUDENT %}
+      <form action="/auth/logout/" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+      </form>
+    {% endif %} 
+    
     {% block content %}{% endblock %}
   </body>
 </html>
