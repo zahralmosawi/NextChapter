@@ -3,11 +3,12 @@
 <html>
   <head>
     <meta charset="utf-8"><title>NextChapter</title>
-</head>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+  </head>
   <body>
-    <img src="{% static 'images/NextChapter.png' %}" alt="NextChapter Logo" width="200" height="200">
-    <p>NextChapter</p>
-    Welcome, {{user.username}}
+    <div class="header">
+    <img src="{% static 'images/NextChapter.jpg' %}" alt="NextChapter Logo" id='logo'>
+
     {% if user.role == user.Role.TRACKER %}
       <nav> 
         <a href="{% url 'add_student' %}">Add New Student</a> 
@@ -16,12 +17,17 @@
     {% endif %}
 
     {% if user.role == user.Role.STUDENT %}
-      <form action="/auth/logout/" method="post">
+      <form action="/auth/logout/" method="post" class='logout-form'>
         {% csrf_token %}
         <button type="submit">Logout</button>
       </form>
     {% endif %} 
+    </div>
 
-    {% block content %}{% endblock %}
+    <div class="main-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
   </body>
 </html>
