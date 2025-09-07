@@ -6,15 +6,24 @@ from django.views.generic import View, CreateView, ListView, DetailView, UpdateV
 from django.contrib.auth import login
 from .forms import StudentProfileForm, ProgressLogForm
 from .models import User, StudentProfile, ProgressLog
+from django.contrib.auth.views import LoginView
 
 def is_tracker(user):
     return user.role == user.Role.TRACKER
 def is_student(user):
     return user.role == user.Role.STUDENT
 
-
-def home(request):
-    return render(request, 'home.html')
+class CustomLoginView(LoginView):
+    template_name = 'registration/login.html'
+    
+    def get_success_url(self):
+        user = self.request.user
+        if user.is_authenticated:
+            if user.role == User.Role.STUDENT:
+                return reverse_lazy('student_dashboard')
+            elif user.role == User.Role.TRACKER:
+                return reverse_lazy('students_list')
+        return reverse_lazy('login') 
 
 from django.conf import settings
 import secrets    
