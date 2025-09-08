@@ -4,8 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.contrib.auth import login
-from .forms import StudentProfileForm, ProgressLogForm
-from .models import User, StudentProfile, ProgressLog
+from .forms import StudentProfileForm, ProgressLogForm, EventForm
+from .models import User, StudentProfile, ProgressLog, Event
 from django.contrib.auth.views import LoginView
 
 def is_tracker(user):
@@ -205,6 +205,19 @@ class UpdateProgressLogView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
     
     def get_success_url(self):
         return reverse_lazy('progress_log_detail', kwargs={'pk': self.object.pk})
+    
+class EventCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Event
+    form_class = EventForm
+    template_name = 'events/add_event.html'
+    success_url = reverse_lazy('students_list')
+    
+    def test_func(self):
+        return self.request.user.role == self.request.user.Role.TRACKER
+    
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
     
 # Student Views
 class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
