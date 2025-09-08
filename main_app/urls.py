@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
+from django.urls import reverse_lazy
 
 urlpatterns = [
     path("auth/login/", views.CustomLoginView.as_view(), name="login"),
@@ -13,4 +15,5 @@ urlpatterns = [
     path('tracker/student/<int:pk>/progress-log/view/', views.ProgressLogDetailView.as_view(), name='progress_log_detail'),
     path('tracker/progress-log/<int:pk>/edit/', views.UpdateProgressLogView.as_view(), name='edit_progress_log'),
     path('tracker/student/<int:student_id>/log/<int:month_number>/', views.ListProgressLogsView.as_view(), name='monthly_logs'),
+    path('student/change-password/', auth_views.PasswordChangeView.as_view(template_name='student/change_password.html',success_url=reverse_lazy('student/dashboard/')), name='change_password'),
 ]

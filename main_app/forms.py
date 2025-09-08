@@ -1,6 +1,5 @@
 from django import forms
 from .models import User, StudentProfile, ProgressLog
-from dateutil.relativedelta import relativedelta 
 
 class StudentProfileForm(forms.ModelForm):
     email = forms.EmailField(required=True)
