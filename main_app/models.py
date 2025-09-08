@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 class User(AbstractUser):
     class Role(models.TextChoices):
@@ -53,3 +54,19 @@ class ProgressLog(models.Model):
     
     def __str__(self):
         return self.student.name + " - " + str(self.date)
+
+class Event(models.Model):
+    title = models.CharField(max_length=200)
+    date = models.DateTimeField()
+    description = models.TextField(blank=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'role': User.Role.TRACKER})
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['date']
+    
+    def __str__(self):
+        return self.title
+    
+    def is_upcoming(self):
+        return self.date >= timezone.now()
