@@ -11,8 +11,9 @@
    {%if user.is_authenticated %}
     {% if user.role == user.Role.TRACKER %}
       <nav> 
-        <a href="{% url 'add_student' %}" class="links">Add New Student</a> 
         <a href="{% url 'students_list' %}" class="links">Student List</a>
+        <a href="{% url 'add_student' %}" class="links">New Student</a> 
+        <a href="{% url 'add_event' %}" class="links">New Event</a>
       </nav>
     {% endif %}
       <form action="/auth/logout/" method="post" class='logout-form'>
@@ -21,7 +22,7 @@
       </form>
       {%endif%}
     </div>
-    
+
     <div class="main-content">
         {% block content %}
         {% endblock %}
