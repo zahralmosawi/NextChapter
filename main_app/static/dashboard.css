@@ -1,139 +1,174 @@
+* {
+  font-family: 'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
+}
+  
+body {
+  background-color: #f5f7f9;
+  padding: 20px;
+  margin: 0;
+}
+
 .dashboard-container {
-    display: grid;
-    grid-template-columns: 2fr 1fr; 
-    grid-template-rows: auto auto; 
-    gap: 2rem;
-    margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
 }
 
 .overall-progress-section {
-    grid-column: 1; 
-    grid-row: 1; 
-    padding: 1.5rem;
-    text-align: center;
-}
-
-.progress-logs-section {
-    grid-column: 1; 
-    grid-row: 2;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.profile-section {
-    grid-column: 2; 
-    grid-row: 1 / span 2; 
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    text-align: center;
-    height: fit-content;
-    position: sticky;
-    top: 100px;
+  background: transparent; 
+  padding: 0;
+  box-shadow: none; 
+  border-radius: 0; 
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 1rem;
 }
 
 .overall-progress-section h2 {
-    color: #333;
-    margin-bottom: 1rem;
-    text-align: center;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .progress-bar-total {
-    width: 100%;
-    height: 30px;
-    background: #f0f0f0;
-    border-radius: 15px;
-    overflow: hidden;
-    position: relative;
+  width: 60%;
+  height: 20px;
+  background: #f0f0f0;
+  border-radius: 15px;
+  overflow: hidden;
+  flex-grow: 1;
 }
 
 .progress-fill-total {
-    height: 100%;
-    border-radius: 15px;
-    background: linear-gradient(90deg, #e96f4a, #e96f4a);
-    transition: width 0.5s ease;
-    position: relative;
+  height: 100%;
+  border-radius: 15px;
+  background: linear-gradient(90deg, #d77d7d, #e78989);
+  transition: width 0.5s ease;
 }
 
-.progress-logs-section h2 {
-    color: #333;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #000000;
+#total-number {
+  font-size: 25px;
+  margin: 0;
+  font-weight: bold;
+  color: #e96f4a;
+  white-space: nowrap;
 }
 
-.progress-header {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #000000;
-    margin-bottom: 1rem;
+
+.progress-logs-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-top: -400px; 
 }
 
-.progress-logs-section ul {
-    list-style: none;
-    padding: 0;
+.profile-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative;
+  padding-top: 60px; 
+  height: auto;
 }
 
-.progress-logs-section li {
-    margin: 0.8rem 0;
-    padding: 1rem;
-    background: #f8f9fa;
-    border-radius: 6px;
-    border-left: 4px solid #717272;
-    transition: all 0.3s ease;
-}
-
-.progress-logs-section li:hover {
-    background: #e9ecef;
-    transform: translateX(5px);
-}
-
-.progress-logs-section a {
-    color: #333;
-    text-decoration: none;
-    font-weight: 500;
-    display: block;
-}
-
-.progress-logs-section a:hover {
-    color: #e96f4a;
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e96f4a, #d77d7d);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 32px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }
 
 .profile-section h2 {
-    color: #333;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #000000;
-}
-
-.profile-section h3 {
-    color: #e96f4a;
-    margin-bottom: 1rem;
+  margin: 0.5rem 0 1.5rem 0;
+  font-size: 25px;
 }
 
 .profile-section p {
-    margin: 0.8rem 0;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #f0f0f0;
-    text-align: left;
-}
-
-.profile-section p:last-child {
-    border-bottom: none;
+  margin: 0.8rem 0;
+  text-align: center;
 }
 
 .profile-section a {
-    color: #e96f4a;
-    text-decoration: none;
+  color: #e96f4a;
+  word-break: break-all;
 }
 
-.profile-section a:hover {
-    text-decoration: underline;
+.employment-info {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #e0e0e0;
 }
 
-p {
-    color: black;
-} 
+.event-section {
+  grid-column: 1 / span 2;
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin: 0.8rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #717272;
+  transition: all 0.3s ease;
+}
+
+li:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+}
+
+a:hover {
+  color: #e96f4a;
+}
+
+h2 {
+  color: #e96f4a;
+  margin-top: 0;
+}
+
+.event-card {
+  margin: 0.8rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #717272;
+  transition: all 0.3s ease;
+}
+  
+.profile-container {
+  position: relative;
+  margin-top: 40px; 
+}

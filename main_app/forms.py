@@ -5,7 +5,7 @@ class StudentProfileForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     class Meta:
         model = StudentProfile
-        fields = ['name', 'email', 'linkedin_url', 'cv_file', 'support_start_date']
+        fields = ['name', 'email', 'linkedin_url', 'cv_file', 'support_start_date', 'employment_status', 'job_title', 'job_start_date']
 
 class ProgressLogForm(forms.ModelForm):
     class Meta:

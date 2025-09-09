@@ -211,6 +211,7 @@ class EventCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = EventForm
     template_name = 'events/add_event.html'
     success_url = reverse_lazy('students_list')
+    context_object_name = 'events'
     
     def test_func(self):
         return self.request.user.role == self.request.user.Role.TRACKER
@@ -247,11 +248,14 @@ class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
             current_month = 0
             total_months = 0
             
+        events = Event.objects.all().order_by('date')[:5]
+
         context = {
             'student': student_profile,
             'progress_logs': progress_logs,
             'current_month': current_month,
             'total_months': total_months,
             'overall_progress': overall_progress,
+            'events' : events,
         }
         return render(request, 'student/dashboard.html', context)
