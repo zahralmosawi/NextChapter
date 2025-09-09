@@ -181,6 +181,12 @@ class ProgressLogDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView)
     template_name = 'progress_log_detail.html'
     context_object_name = 'progress_log'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        from django.contrib.auth import get_user_model
+        context['User'] = get_user_model()
+        return context
+    
     def test_func(self):
         progress_log = self.get_object()
 

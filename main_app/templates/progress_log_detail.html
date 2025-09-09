@@ -1,6 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
+<style>
+.container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-family: 'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+h1 {
+    color: #e96f4a;
+    text-align: left;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.edit-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #f5f5f5;
+    border-radius: 6px;
+    color: #333;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+.edit-link:hover {
+    background: #e96f4a;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(233, 111, 74, 0.3);
+}
+</style>
+<div class="container">
     <h1>Progress Log Detail For {{ progress_log.student }}</h1>
     <p><strong>Date:</strong> {{ progress_log.date }}</p>
     <p><strong>Interaction Type:</strong> {{ progress_log.interaction_type }}</p>
@@ -8,8 +43,8 @@
     <p><strong>Tracker:</strong> {{ progress_log.tracker_name }}</p>
     <p><strong>Comment:</strong> {{ progress_log.comment }}</p>
 
-    {% if User.Role.TRACKER %}
-    <a href="{% url 'edit_progress_log' progress_log.pk %}">Edit</a>
+    {% if request.user.role == User.Role.TRACKER %}
+    <a href="{% url 'edit_progress_log' progress_log.pk %}" class="edit-link">Edit</a>
     {% endif %}
-    
+    </div>
 {% endblock  %}
