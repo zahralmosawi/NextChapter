@@ -14,7 +14,6 @@ urlpatterns = [
     path('tracker/student/<int:student_id>/progress-log/create/', views.AddProgressLogView.as_view(), name='add_progress_log'),
     path('tracker/student/<int:pk>/progress-log/view/', views.ProgressLogDetailView.as_view(), name='progress_log_detail'),
     path('tracker/progress-log/<int:pk>/edit/', views.UpdateProgressLogView.as_view(), name='edit_progress_log'),
-    path('tracker/student/<int:student_id>/log/<int:month_number>/', views.ListProgressLogsView.as_view(), name='monthly_logs'),
 
     path('events/add/', views.EventCreateView.as_view(), name='add_event'),
 
