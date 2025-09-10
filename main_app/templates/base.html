@@ -15,12 +15,14 @@
         <a href="{% url 'add_student' %}" class="links">New Student</a> 
         <a href="{% url 'add_event' %}" class="links">New Event</a>
       </nav>
+    {% elif user.role == user.Role.STUDENT %}
+    <a href="{% url 'change_password' %}" class="links">Change Password</a>
     {% endif %}
       <form action="/auth/logout/" method="post" class='logout-form'>
         {% csrf_token %}
         <button type="submit">Logout</button>
       </form>
-      {%endif%}
+    {%endif%}
     </div>
 
     <div class="main-content">
