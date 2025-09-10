@@ -9,7 +9,7 @@
 
 ## Overview
 NextChapter is a Django-based web application designed to support graduate students through a structured 9-month career development program. The system allows trackers (career advisors) to monitor student progress and enables students to view their mentorship journey.
-![Dashboard Screenshot](images/dashboard.png)
+<img width="400" height="400" src="static/images/dashboard.png" alt="Screenshot of the app ">
 
 ## Purpose
 To provide a centralized platform for tracking graduate student career development progress over a 9-month support period, including mentorship interactions, CV updates, interview preparation, and employment outcomes.
