@@ -3,15 +3,32 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'dashboard.css' %}" />
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
 <div class="dashboard-container">
 
-  <div class="overall-progress-section">
-    {% comment %} <h2>Your Overall Progress</h2> {% endcomment %}
-    <p id="total-number">{{ current_month }}/{{ total_months }}</p>
+ <div class="overall-progress-wrapper">
+  <div class="progress-message">
+    {% if progress_logs|length <= 3 %}
+      <p>[Keep going, you're just starting!]</p>
+    {% elif progress_logs|length <= 5 %}
+      <p>[ Hold tight, you're almost there. ]</p>
+    {% elif progress_logs|length <= 9 %}
+      <p>[Wow! The finish line is in sight]</p>
+    {% endif %}
+  </div>
+
+  <div class="progress-line">
+    <div class="progress-value" id="total-number">
+      {{ current_month }}/{{ total_months }}
+    </div>
     <div class="progress-bar-total">
       <div class="progress-fill-total" style="width: {{ overall_progress }}%;"></div>
     </div>
   </div>
+</div>
+
 
   <div class="profile-section">
     <div class="profile-avatar">
@@ -32,18 +49,23 @@
     {% endif %}
   </div>
 
-  <div class="progress-logs-section">
-    <h2>Progress Logs</h2>
-    {% if progress_logs %} 
-    <ul>
-      {% for log in progress_logs %}
-      <li><a href="{% url 'progress_log_detail' log.pk %}">{{ log.month_number }}</a></li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>No progress logs available</p>
-    {% endif %}
+ 
+ <div class="progress-logs-grid">
+   <h2>Progress Logs</h2> 
+  {% for log in progress_logs %}
+  <div class="log-avatar-container">
+    
+    <a href="{% url 'progress_log_detail' log.pk %}">
+      <img 
+        src="https://api.dicebear.com/9.x/thumbs/svg?seed={{ log.pk }}&backgroundColor=b6e3f4,c0aede,d1d4f9" 
+        alt="Avatar for {{ log.month_number }}" 
+        class="log-avatar"
+      />
+      <div class="log-month-number">{{ log.month_number }}</div>
+    </a>
   </div>
+  {% endfor %}
+</div>
 
   <div class="event-section">
     <h2>Upcoming Events</h2>
