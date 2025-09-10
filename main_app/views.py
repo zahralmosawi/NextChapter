@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-# from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView, DeleteView
