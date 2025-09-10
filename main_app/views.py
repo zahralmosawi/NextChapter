@@ -7,6 +7,7 @@ from django.contrib.auth import login
 from .forms import StudentProfileForm, ProgressLogForm, EventForm
 from .models import User, StudentProfile, ProgressLog, Event
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import PasswordChangeView
 
 def is_tracker(user):
     return user.role == user.Role.TRACKER
@@ -265,3 +266,12 @@ class StudentDashboardView(LoginRequiredMixin, UserPassesTestMixin, View):
             'events' : events,
         }
         return render(request, 'student/dashboard.html', context)
+    
+class ChangePasswordView(LoginRequiredMixin, UserPassesTestMixin, PasswordChangeView):
+    template_name = 'change-password.html'
+    
+    def test_func(self):
+        return self.request.user
+    
+    def get_success_url(self):
+        return reverse_lazy("student_dashboard")

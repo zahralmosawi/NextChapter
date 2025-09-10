@@ -19,5 +19,5 @@ urlpatterns = [
     path('events/add/', views.EventCreateView.as_view(), name='add_event'),
 
     path('student/dashboard/', views.StudentDashboardView.as_view(), name='student_dashboard'),
-    path('student/change-password/', auth_views.PasswordChangeView.as_view(template_name='student/change_password.html',success_url=reverse_lazy('student/dashboard/')), name='change_password'),
+    path('student/change-password/', views.ChangePasswordView.as_view(), name='change_password'),
 ]
