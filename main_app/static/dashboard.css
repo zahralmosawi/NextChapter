@@ -61,7 +61,6 @@ body {
   padding: 1.5rem;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  /* margin-top: -400px;  */
 }
 
 .profile-section {
@@ -165,8 +164,6 @@ h2 {
   padding: 1rem;
   background: #f8f9fa;
   border-radius: 6px;
-  border-left: 4px solid #717272;
-  border-left: 4px solid #e96f4a;
   border-left: 4px solid #7dd7c8e3;
   transition: all 0.3s ease;
 }
@@ -177,7 +174,6 @@ h2 {
 }
 
 .progress-logs-grid {
- 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(72px, max-content));
   gap: 20px; 
@@ -190,8 +186,6 @@ h2 {
   margin-top: -180px;
   margin-bottom: 60px;
 }
-
-
 
 .log-avatar-container {
   text-align: center;
@@ -267,12 +261,13 @@ h2 {
   background: linear-gradient(90deg, #7dd7c8e3, #7dd7c8e3);
   transition: width 0.5s ease;
 }
+
 .progress-logs-section {
   background: white;
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-top: -400px;
+  margin-top: -237px;
 }
 
 .progress-logs-section h2 {
@@ -305,6 +300,5 @@ h2 {
 .progress-logs-grid h2 {
   grid-column: 1 / -1; 
   margin-bottom: 1rem;  
-  color: #e96f4a;
   color: #858280;
 }
