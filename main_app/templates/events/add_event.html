@@ -75,16 +75,6 @@ button:hover {
   box-shadow: 0 4px 12px rgba(233, 111, 74, 0.3);
 }
 
-.cancel-btn {
-  background: #777; 
-}
-
-.cancel-btn a {
-  color: white;
-  text-decoration: none;
-  display: block; 
-}
-
 </style>
 <div class="container">
   <h1>Add New Event</h1>
@@ -92,7 +82,5 @@ button:hover {
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Create Event</button> 
-  <button class="cancel-btn"><a href="{% url 'students_list' %}" class="view-all-events">Cancel</a></button>
-  </form>
 </div>
 {% endblock %}
